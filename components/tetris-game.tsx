@@ -4,8 +4,11 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 
+// Define the type for piece shapes
+type PieceShape = number[][];
+
 // Tetris piece types
-const SHAPES = [
+const SHAPES: PieceShape[] = [
   // I
   [
     [0, 0, 0, 0],
@@ -88,10 +91,13 @@ export function TetrisGame() {
   const [lines, setLines] = useState(0);
   const { theme } = useTheme();
   
-  // Game state
-  const boardRef = useRef(Array(ROWS).fill(null).map(() => Array(COLS).fill(0)));
-  const currentPieceRef = useRef({ shape: [[]], position: { x: 0, y: 0 } });
-  const nextPieceRef = useRef(SHAPES[Math.floor(Math.random() * SHAPES.length)]);
+  // Game state with proper typing
+  const boardRef = useRef<number[][]>(Array(ROWS).fill(null).map(() => Array(COLS).fill(0)));
+  const currentPieceRef = useRef<{ shape: PieceShape, position: { x: number, y: number } }>({
+    shape: [[]],
+    position: { x: 0, y: 0 }
+  });
+  const nextPieceRef = useRef<PieceShape>(SHAPES[Math.floor(Math.random() * SHAPES.length)]);
   const requestIdRef = useRef<number | null>(null);
   const lastTimeRef = useRef(0);
   const dropTimeRef = useRef(1000);
@@ -246,7 +252,7 @@ export function TetrisGame() {
   }, [theme]);
   
   // Check if a move is valid
-  const isValidMove = useCallback((shape: number[][], position: { x: number, y: number }) => {
+  const isValidMove = useCallback((shape: PieceShape, position: { x: number, y: number }) => {
     for (let row = 0; row < shape.length; row++) {
       for (let col = 0; col < shape[row].length; col++) {
         if (shape[row][col] > 0) {
@@ -287,7 +293,9 @@ export function TetrisGame() {
     if (gameOver || paused) return;
     
     const shape = currentPieceRef.current.shape;
-    const newShape = Array(shape[0].length).fill(null).map(() => Array(shape.length).fill(0));
+    const newShape: PieceShape = Array(shape[0].length)
+      .fill(null)
+      .map(() => Array(shape.length).fill(0));
     
     for (let row = 0; row < shape.length; row++) {
       for (let col = 0; col < shape[row].length; col++) {
@@ -463,7 +471,7 @@ export function TetrisGame() {
   return (
     <div 
       ref={gameContainerRef}
-      className="flex flex-col md:flex-row gap-8 items-center justify-center w-full"
+      className="flex flex-col md:flex-row gap-8 items-center justify-center w-full tetris-container"
       tabIndex={0} // Make div focusable to capture keyboard events
     >
       <div className="relative">
@@ -500,7 +508,7 @@ export function TetrisGame() {
         )}
         
         {/* Mobile controls */}
-        <div className="md:hidden mt-4 grid grid-cols-3 gap-2 w-full">
+        <div className="md:hidden mt-4 grid grid-cols-3 gap-2 w-full tetris-controls">
           <button
             className="p-4 bg-slate-200 dark:bg-slate-700 rounded-lg text-2xl"
             onClick={() => movePiece(-1)}
