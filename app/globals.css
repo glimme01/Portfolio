@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 179, 197, 230;
+  --background-end-rgb: 143, 168, 212;
+  --card-bg: 255, 255, 255, 0.1;
+  --card-border: 255, 255, 255, 0.2;
+  --card-hover: 255, 255, 255, 0.4;
+}
+
+.dark {
+  --foreground-rgb: 241, 245, 249;
+  --background-start-rgb: 15, 23, 42;
+  --background-end-rgb: 30, 41, 59;
+  --card-bg: 30, 41, 59, 0.3;
+  --card-border: 51, 65, 85, 0.4;
+  --card-hover: 51, 65, 85, 0.6;
+}
+
+@layer base {
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom right, 
+      rgb(var(--background-start-rgb)), 
+      rgb(var(--background-end-rgb)));
+    min-height: 100vh;
+  }
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+  width: 80%;
+}
+
+.title-text {
+  font-family: 'Space Mono', monospace;
+  -webkit-text-stroke: 1px currentColor;
+  text-shadow: 
+    2px 2px 0 rgba(var(--foreground-rgb), 0.1),
+    4px 4px 0 rgba(var(--foreground-rgb), 0.05);
+}
+
+.role-text {
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px 0 rgba(var(--foreground-rgb), 0.1);
+}
+
+/* 3D card effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.card-3d-content {
+  transform: translateZ(20px);
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(var(--card-bg));
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--card-border));
+  transition: all 0.3s ease;
+}
+
+.glass:hover {
+  border-color: rgba(var(--card-hover));
+  transform: translateY(-5px);
+}
+
+/* Terminal scrollbar */
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(76, 175, 80, 0.5);
+  border-radius: 4px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 175, 80, 0.7);
+}
+
+/* Terminal line animation */
+.terminal-line {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Perspective for 3D effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improved focus styles */
+:focus {
+  outline: 2px solid rgba(var(--card-hover));
+  outline-offset: 2px;
+}
+
+/* Improved selection styles */
+::selection {
+  background-color: rgba(var(--foreground-rgb), 0.2);
+}
+
+/* Tetris game styles */
+.tetris-container:focus {
+  outline: none;
+}
+
+.tetris-container button {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent scrolling when arrow keys are pressed */
+html.game-active {
+  overflow: hidden;
+}
+
+/* Mobile controls */
+@media (max-width: 768px) {
+  .tetris-controls button {
+    min-height: 60px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
