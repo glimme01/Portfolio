@@ -9,8 +9,8 @@ import { PersistentBackground } from '@/components/persistent-background';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Moritz Freund | Developer & Gamer',
-  description: 'Personal portfolio showcasing my projects and skills as a developer and gaming enthusiast.',
+  title: 'Moritz Freund - Portfolio',
+  description: 'Personal portfolio of Moritz Freund - Developer, Gamer, Student',
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className="min-h-screen bg-gradient-to-b from-white to-slate-100 dark:from-slate-950 dark:to-slate-900">
         <Providers>
           <PersistentBackground />
           {children}

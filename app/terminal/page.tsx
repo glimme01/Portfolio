@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ThreeBackground } from "@/components/three-background";
 import { setCookie, getCookie } from "@/utils/cookies";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default function Terminal() {
   const [command, setCommand] = useState("");
@@ -358,28 +360,7 @@ export default function Terminal() {
     <div className="min-h-screen text-slate-900 dark:text-slate-100">
       <ThreeBackground />
       
-      <motion.nav 
-        className="p-6 backdrop-blur-sm bg-white/30 dark:bg-slate-900/30 border-b border-white/20 dark:border-slate-700/20"
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold font-mono relative group">
-            <span>MF</span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-8">
-              <Link href="/about" className="nav-link">About</Link>
-              <Link href="/about-you" className="nav-link">About You</Link>
-              <Link href="/tetris" className="nav-link">Tetris</Link>
-              <Link href="/terminal" className="nav-link">Terminal</Link>
-            </div>
-            <ThemeToggle />
-          </div>
-        </div>
-      </motion.nav>
+      <Navbar />
 
       <main className="max-w-7xl mx-auto px-6 py-20">
         <motion.div
@@ -465,6 +446,7 @@ export default function Terminal() {
           </motion.div>
         </motion.div>
       </main>
+      <Footer />
     </div>
   );
 }

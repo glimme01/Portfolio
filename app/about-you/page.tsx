@@ -12,6 +12,8 @@ import {
   Laptop, Monitor, MousePointer, Keyboard, Camera, Mic, 
   BrainCircuit, Fingerprint, Ghost, Skull
 } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default function AboutYou() {
   const [userInfo, setUserInfo] = useState({
@@ -256,28 +258,8 @@ export default function AboutYou() {
     <div className="min-h-screen text-slate-900 dark:text-slate-100">
       <ThreeBackground />
       
-      <motion.nav 
-        className="p-6 backdrop-blur-sm bg-white/30 dark:bg-slate-900/30 border-b border-white/20 dark:border-slate-700/20"
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold font-mono relative group">
-            <span>MF</span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-8">
-            <Link href="/about" className="nav-link">About</Link>
-            <Link href="/about-you" className="nav-link">About You</Link>
-            <Link href="/tetris" className="nav-link">Tetris</Link>
-            <Link href="/terminal" className="nav-link">Terminal</Link>
-            </div>
-            <ThemeToggle />
-          </div>
-        </div>
-      </motion.nav>
+      <Navbar />
+      
 
       <main className="max-w-7xl mx-auto px-6 py-20">
         <motion.div
@@ -354,28 +336,7 @@ export default function AboutYou() {
             </Card3D>
           )}
 
-          {showCreepyMessage && creepyMessages.length > 0 && (
-            <motion.div 
-              className="fixed bottom-6 right-6 z-50 max-w-xs"
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 100, opacity: 0 }}
-            >
-              <Card3D>
-                <div className="glass p-4 rounded-lg bg-red-500/20 border-red-500/40">
-                  <div className="flex items-start gap-3">
-                    <Ghost className="text-red-500 shrink-0 mt-1" />
-                    <div>
-                      <p className="font-medium">{creepyMessages[creepyMessages.length - 1]}</p>
-                      <p className="text-xs mt-1 text-slate-600 dark:text-slate-400">
-                        {new Date().toLocaleTimeString()}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card3D>
-            </motion.div>
-          )}
+          
 
           {revealInfo && (
             <div className="space-y-12">
@@ -570,31 +531,11 @@ export default function AboutYou() {
                   </div>
                 </Card3D>
               </ScrollAnimation>
-              
-              {creepyMessages.length > 0 && (
-                <ScrollAnimation delay={0.8}>
-                  <Card3D>
-                    <div className="glass p-6 rounded-lg border-red-500/30">
-                      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                        <Ghost className="text-red-500" size={24} />
-                        <span>Messages</span>
-                      </h2>
-                      
-                      <div className="space-y-4">
-                        {creepyMessages.map((message, index) => (
-                          <div key={index} className="p-3 bg-red-500/10 rounded-lg">
-                            <p>{message}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </Card3D>
-                </ScrollAnimation>
-              )}
           </div>
           )}
         </motion.div>
       </main>
+      <Footer />
     </div>
   );
 }
