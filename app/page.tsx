@@ -123,7 +123,7 @@ export default function Home() {
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-mono">GET IN TOUCH</h2>
           <p className="max-w-xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base">
-            Interested in working together? I'm always open to new opportunities and collaborations.
+            These are my socials.
           </p>
           <div className="flex justify-center gap-6 sm:gap-8">
             <motion.a 
