@@ -11,6 +11,7 @@ export function CreepyMessages() {
   const messageTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const creepyMessages = [
+    "I know things about you",
     "I see you're still here...",
     "You seem to move your mouse a lot.",
     "Do you always browse like this?",
